@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import os
+import sys
+import unittest
+
+_UTESTS_DIR = 'unit_tests'
+
+
+sys.path.insert(0, os.path.expandvars("$CHECKBOX_SHARE"))
+sys.path.insert(0, os.path.expandvars('$PLAINBOX_PROVIDER_DATA/' + _UTESTS_DIR))
+
+print(os.environ)
+print(sys.path)
+
+
+if __name__ == '__main__':
+    unittest.main(module=None)

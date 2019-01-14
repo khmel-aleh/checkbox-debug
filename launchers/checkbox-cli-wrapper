@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export PATH="$PATH:$SNAP/usr/sbin"
+#env
+exec python3 $(which checkbox-cli) "$@"

@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+# Copyright 2017 Canonical Ltd.
+# All rights reserved.
+#
+# Written by:
+#   Maciej Kisielewski <maciej.kisielewski@canonical.com>
+"""
+This hook reads `config_vars` file from the root of a snap and reenters this
+configuration using snapd's config facilities and rewrites the file to a
+checkbox config format in `$SNAP_DATA/checkbox.conf`.
+
+config_vars should list all the configuration variables in a `key=value`
+syntax. The line can list variable name only, if the variable should not have a
+default value. All keys should comprise of CAPS, numbers and undescores (_).
+E.g.:
+
+OPEN_N_SSID
+OPEN_BG_SSID
+STRESS_S3_WAIT_DELAY=60
+
+To change those values use the configure launcher.
+E.g.
+    $ checkbox-snappy.configure OPEN_N_SSID=my-wifi
+
+If you __really__ need to change those values using `snap set` command,
+you need to change CAPS to lowercase and underscores to dashes (-).
+
+E.g.
+    $ snap set checkbox-snappy open-n-ssid=my-wifi
+"""
+
+import os
+import sys
+import traceback
+
+
+sys.path.append(os.path.expandvars("$SNAP/usr/lib/python3/dist-packages"))
+sys.path.append(os.path.expandvars("$SNAP/lib/python3.5/site-packages"))
+
+_UTESTS_DIR = '/media/sf_PycharmProjects/launchpad/checkbox-tillamook/checkbox-provider-tillamook/data/unit_tests'
+_TF_DIR = '/media/sf_PycharmProjects/rigado-checkbox-tools'
+
+sys.path.insert(0, os.path.expandvars(_UTESTS_DIR))
+sys.path.insert(0, os.path.expandvars(_TF_DIR))
+
+_ERROR_FILE = '/home/aleh/tillamook/cb-debug/debug.log'
+_INFO_FILE = '/home/aleh/tillamook/cb-debug/debug.log'
+
+try:
+    from edge_direct.test_debug import handle_configure_hook
+    handle_configure_hook()
+except Exception as e:
+    with open(_ERROR_FILE, 'w') as f:
+        # f.write(str(os.environ) + '\n')
+        # f.write(str(sys.path) + '\n')
+        f.write(str(e) + '\n')
+        # f.write(str(sys.exc_info()) + '\n')
+        f.write(traceback.format_exc() + '\n')
+        # traceback.print_last(file=f)
+else:
+    with open(_INFO_FILE, 'w') as f:
+        f.write('Hello VooDoo' + '\n')
+
+# edge_direct\test_debug.py
+
+# handle_snap_set()
+
+

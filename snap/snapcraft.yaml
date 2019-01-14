@@ -1,0 +1,39 @@
+name: checkbox-debug
+version: 1
+summary: Tool for dedugging Checkbox
+description: Tool for dedugging Checkbox
+grade: devel
+confinement: strict
+
+apps:
+    unittests-runner:
+        command: bin/unittests-runner
+
+    checkbox-cli:
+        command: bin/checkbox-cli-wrapper
+
+    python3:
+        command: python3
+
+    debug:
+      command: bin/debug_launcher
+
+
+parts:
+    checkbox-ng-dev:
+        source-tag: ""
+
+    launchers:
+        plugin: dump
+        source: launchers/
+        organize:
+            '*': bin/
+
+    rigado-test-framework:
+      source-type: git
+      source: git+ssh://git.launchpad.net/~tillamook-team/tillamook/+git/rigado-checkbox-tools
+      source-tag: v0.6
+      plugin: python
+      requirements: requirements.txt
+      python-packages:
+        - flask

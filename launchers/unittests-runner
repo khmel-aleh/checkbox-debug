@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+import os
+import sys
+import unittest
+
+_UTESTS_DIR = '$PLAINBOX_PROVIDER_DATA/unit_tests'
+
+sys.path.insert(0, os.path.expandvars(_UTESTS_DIR))
+
+if __name__ == '__main__':
+    unittest.main(module=None)
