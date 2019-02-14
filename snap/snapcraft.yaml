@@ -8,16 +8,12 @@ confinement: strict
 apps:
     unittests-runner:
         command: bin/unittests-runner
-
     checkbox-cli:
         command: bin/checkbox-cli-wrapper
-
     python3:
         command: python3
-
     debug:
       command: bin/debug_launcher
-
 
 parts:
     checkbox-ng-dev:
@@ -30,10 +26,11 @@ parts:
             '*': bin/
 
     rigado-test-framework:
+      plugin: python
       source-type: git
       source: git+ssh://git.launchpad.net/~tillamook-team/tillamook/+git/rigado-checkbox-tools
-      source-tag: v0.6
-      plugin: python
-      requirements: requirements.txt
-      python-packages:
-        - flask
+      source-tag: v0.7
+      build-packages:
+        - libffi-dev
+#      python-packages:
+#        - flask
