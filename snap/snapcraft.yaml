@@ -29,8 +29,8 @@ parts:
       plugin: python
       source-type: git
       source: git+ssh://git.launchpad.net/~tillamook-team/tillamook/+git/rigado-checkbox-tools
-      source-tag: v0.7
+      source-tag: msdt_0.1
       build-packages:
-        - libffi-dev
+      - libffi-dev
 #      python-packages:
 #        - flask

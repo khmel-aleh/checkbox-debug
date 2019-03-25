@@ -3,9 +3,23 @@ import os
 import sys
 import unittest
 
+
+"""
+export DEBUG_TOOLS_PATH="/media/sf_PycharmProjects/rigado-checkbox-tools"
+export DEBUG_SNAP_DATA="/media/sf_PycharmProjects/rigado-checkbox-tools/configs"
+"""
+DEBUG_TOOLS_PATH = os.getenv('DEBUG_TOOLS_PATH', None)
+if DEBUG_TOOLS_PATH:
+        sys.path.insert(0, DEBUG_TOOLS_PATH)
+
+DEBUG_SNAP_DATA = os.getenv('DEBUG_SNAP_DATA', None)
+if DEBUG_SNAP_DATA:
+    os.environ["SNAP_DATA"] = DEBUG_SNAP_DATA
+
 _UTESTS_DIR = '$PLAINBOX_PROVIDER_DATA/unit_tests'
 
 sys.path.insert(0, os.path.expandvars(_UTESTS_DIR))
+
 
 if __name__ == '__main__':
     unittest.main(module=None)

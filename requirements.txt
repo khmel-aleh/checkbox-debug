@@ -1,8 +1,0 @@
-adal
-msrestazure
-paramiko
-PyYAML
-pyserial
-requests
-requests_unixsocket
-rstr
